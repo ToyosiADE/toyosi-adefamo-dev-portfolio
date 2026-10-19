@@ -1,1 +1,17 @@
-(() => { const toggle = document.querySelector('.menu-toggle'); const links = document.querySelector('.nav-links'); if (toggle && links) { toggle.addEventListener('click', () => { const isOpen = links.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(isOpen)); toggle.setAttribute( 'aria-label', isOpen ? 'Close navigation' : 'Open navigation'); }); links.querySelectorAll('a').forEach((link) => { link.addEventListener('click', () => { links.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open navigation'); }); }); } const themeToggle = document.querySelector('.theme-toggle'); const savedTheme = localStorage.getItem('portfolio-theme'); function applyTheme(theme) { document.documentElement.setAttribute('data-theme', theme); if (themeToggle) { const isDark = theme === 'dark'; themeToggle.textContent = isDark ? '☀ Light mode' : '☾ Dark mode'; themeToggle.setAttribute( 'aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode'); themeToggle.setAttribute( 'aria-pressed', String(isDark)); } localStorage.setItem('portfolio-theme', theme); } applyTheme(savedTheme === 'dark' ? 'dark' : 'light'); if (themeToggle) { themeToggle.addEventListener('click', () => { const currentTheme = document.documentElement.getAttribute('data-theme'); applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }); } const year = document.getElementById('year'); if (year) { year.textContent = new Date().getFullYear(); } })();
+const toggle = document.getElementById('themeToggle');
+const label = document.getElementById('themeLabel');
+const saved = localStorage.getItem('toyosi-theme');
+if (saved === 'dark') document.body.classList.add('dark');
+function refreshTheme() {
+  const dark = document.body.classList.contains('dark');
+  label.textContent = dark ? 'Light mode' : 'Dark mode';
+  toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+  document.querySelector('meta[name="theme-color"]').content = dark ? '#151515' : '#F4F1EB';
+}
+toggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  localStorage.setItem('toyosi-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  refreshTheme();
+});
+refreshTheme();
+document.getElementById('year').textContent = new Date().getFullYear();
