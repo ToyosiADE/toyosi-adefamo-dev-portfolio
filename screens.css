@@ -1,27 +1,29 @@
-/* Real app screenshots on the Food Delivery card */
-.food-art { position: relative; overflow: hidden; min-height: 380px; }
-.food-art .shots {
+/* Real app screenshots on project cards - full screens visible */
+.food-art, .pharmacy-art, .coffee-art, .journey-art { position: relative; overflow: hidden; min-height: 420px; }
+.shots {
   position: absolute;
-  left: 0; right: 0; bottom: 0; top: 56px;
+  left: 0; right: 0; bottom: 16px; top: 48px;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   gap: 5%;
   padding: 0 8%;
 }
-.food-art .real-shot {
+.real-shot {
   height: 100%;
   width: auto;
   max-width: 44%;
-  object-fit: cover;
-  object-position: top center;
-  border-radius: 18px 18px 0 0;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
-.food-art .real-shot:first-child { transform: translateY(14px) rotate(-2deg); }
-.food-art .real-shot:last-child { transform: translateY(28px) rotate(2deg); }
-.food-art .stamp { z-index: 2; }
+.shots.single .real-shot { max-width: 60%; }
+.food-art .real-shot:first-child { transform: rotate(-2deg); }
+.food-art .real-shot:last-child { transform: rotate(2deg); }
+.stamp { z-index: 2; }
 @media (max-width: 640px) {
-  .food-art { min-height: 320px; }
-  .food-art .real-shot { max-width: 46%; }
+  .food-art, .pharmacy-art, .coffee-art, .journey-art { min-height: 360px; }
+  .real-shot { max-width: 46%; }
+  .shots.single .real-shot { max-width: 60%; }
 }
